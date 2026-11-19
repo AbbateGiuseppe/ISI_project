@@ -18,15 +18,25 @@ El software implementa la gestión de las seis entidades principales definidas e
 - **Gestión manual de fechas**: el sistema no utiliza la fecha del sistema; todas las fechas necesarias (fecha de estreno, recogida, devolución, fecha actual de validación y creación de estadística) se solicitan por pantalla para que el usuario las introduzca manualmente en formato `DD/MM/AAAA`.
 - **Atributos derivados y no editables**: los códigos identificativos son autonuméricos; las fechas de recogida y de creación de estadística son de solo lectura, mientras que el total a pagar y el total gastado se calculan dinámicamente.
 
-## Estructura del repositorio
+# ISI Project – Sistema de Gestión de Videoclubs (Cadena APPV)
+
+Aplicación web Full-Stack (Backend en Python/Flask y Frontend en HTML/CSS/JavaScript) para la gestión operativa y estadística de todos los videoclubs de la cadena **APPV**.
+
+## Arquitectura del proyecto
 
 ```text
 ISI_project/
-├── APPV.py             # Código fuente principal de la aplicación
-├── README.md           # Documentación del proyecto
-└── .gitignore          # Archivo de exclusión para Git
-```
-
+├── backend/
+│   ├── models.py                # Entidades y reglas de negocio de APPV
+│   ├── app.py                   # API REST y servidor web en Flask
+│   └── requirements.txt         # Dependencias del backend
+├── frontend/
+│   ├── index.html               # Interfaz de usuario en español
+│   ├── style.css                # Estilos de la aplicación
+│   └── app.js                   # Lógica de cliente y peticiones a la API
+├── sonar-project.properties     # Configuración para análisis estático en SonarQube
+├── README.md
+└── .gitignore
 ## Requisitos y ejecución
 
 - **Python 3.8** o superior (no requiere librerías externas).

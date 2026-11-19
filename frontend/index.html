@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APPV - Gestión de Videoclubs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Cadena de Videoclubs APPV</h1>
+    <p>Sistema de gestión operativa y estadística (introducción manual de fechas DD/MM/AAAA)</p>
+  </header>
+
+  <main>
+    <div id="notificacion" class="notificacion oculto" role="alert"></div>
+
+    <div class="grid-secciones">
+      <!-- VIDEOCLUBS -->
+      <section class="tarjeta">
+        <h2>Videoclubs</h2>
+        <form id="form-videoclub">
+          <label for="vc-gerente">Nombre del gerente *</label>
+          <input id="vc-gerente" type="text" required>
+
+          <label for="vc-ciudad">Ciudad *</label>
+          <input id="vc-ciudad" type="text" required>
+
+          <label for="vc-calle">Calle *</label>
+          <input id="vc-calle" type="text" required>
+
+          <label for="vc-cp">Código postal (5 caracteres) *</label>
+          <input id="vc-cp" type="text" maxlength="5" minlength="5" required>
+
+          <button type="submit">Crear Videoclub</button>
+        </form>
+
+        <form id="form-editar-videoclub" class="form-secundario">
+          <h3>Modificar Videoclub</h3>
+          <label for="vc-edit-codigo">Código del videoclub *</label>
+          <input id="vc-edit-codigo" type="number" min="1" required>
+
+          <label for="vc-edit-gerente">Nuevo gerente *</label>
+          <input id="vc-edit-gerente" type="text" required>
+
+          <label for="vc-edit-ciudad">Nueva ciudad *</label>
+          <input id="vc-edit-ciudad" type="text" required>
+
+          <label for="vc-edit-calle">Nueva calle *</label>
+          <input id="vc-edit-calle" type="text" required>
+
+          <label for="vc-edit-cp">Nuevo código postal *</label>
+          <input id="vc-edit-cp" type="text" maxlength="5" minlength="5" required>
+
+          <button type="submit" class="btn-secundario">Actualizar Videoclub</button>
+        </form>
+        <ul id="lista-videoclubs" class="lista-datos"></ul>
+      </section>
+
+      <!-- PELÍCULAS -->
+      <section class="tarjeta">
+        <h2>Películas</h2>
+        <form id="form-pelicula">
+          <label for="pel-vc">Código del videoclub asignado *</label>
+          <input id="pel-vc" type="number" min="1" required>
+
+          <label for="pel-nombre">Nombre de la película *</label>
+          <input id="pel-nombre" type="text" required>
+
+          <label for="pel-director">Director (opcional)</label>
+          <input id="pel-director" type="text">
+
+          <label for="pel-estreno">Fecha de estreno (DD/MM/AAAA) *</label>
+          <input id="pel-estreno" type="text" placeholder="31/03/1999" required>
+
+          <label for="pel-precio">Precio de alquiler (€) *</label>
+          <input id="pel-precio" type="number" step="0.01" min="0.01" required>
+
+          <button type="submit">Crear Película</button>
+        </form>
+
+        <form id="form-editar-pelicula" class="form-secundario">
+          <h3>Modificar Película</h3>
+          <label for="pel-edit-codigo">Código de la película *</label>
+          <input id="pel-edit-codigo" type="number" min="1" required>
+
+          <label for="pel-edit-nombre">Nuevo nombre *</label>
+          <input id="pel-edit-nombre" type="text" required>
+
+          <label for="pel-edit-director">Nuevo director (opcional)</label>
+          <input id="pel-edit-director" type="text">
+
+          <label for="pel-edit-estreno">Nueva fecha de estreno (DD/MM/AAAA) *</label>
+          <input id="pel-edit-estreno" type="text" placeholder="31/03/1999" required>
+
+          <label for="pel-edit-precio">Nuevo precio (€) *</label>
+          <input id="pel-edit-precio" type="number" step="0.01" min="0.01" required>
+
+          <button type="submit" class="btn-secundario">Actualizar Película</button>
+        </form>
+        <ul id="lista-peliculas" class="lista-datos"></ul>
+      </section>
+
+      <!-- SOCIOS -->
+      <section class="tarjeta">
+        <h2>Socios</h2>
+        <form id="form-socio">
+          <label for="soc-nombre">Nombre del socio *</label>
+          <input id="soc-nombre" type="text" required>
+
+          <label for="soc-edad">Edad *</label>
+          <input id="soc-edad" type="number" min="1" required>
+
+          <button type="submit">Registrar Socio</button>
+        </form>
+
+        <form id="form-editar-socio" class="form-secundario">
+          <h3>Modificar Socio</h3>
+          <label for="soc-edit-codigo">Código del socio *</label>
+          <input id="soc-edit-codigo" type="number" min="1" required>
+
+          <label for="soc-edit-nombre">Nuevo nombre *</label>
+          <input id="soc-edit-nombre" type="text" required>
+
+          <label for="soc-edit-edad">Nueva edad *</label>
+          <input id="soc-edit-edad" type="number" min="1" required>
+
+          <button type="submit" class="btn-secundario">Actualizar Socio</button>
+        </form>
+        <ul id="lista-socios" class="lista-datos"></ul>
+      </section>
+
+      <!-- ALQUILERES -->
+      <section class="tarjeta">
+        <h2>Alquileres</h2>
+        <form id="form-alquiler">
+          <label for="alq-socio">Código del socio *</label>
+          <input id="alq-socio" type="number" min="1" required>
+
+          <label for="alq-peliculas">Códigos de películas (separados por coma) *</label>
+          <input id="alq-peliculas" type="text" placeholder="Ej: 1, 2" required>
+
+          <label for="alq-recogida">Fecha de recogida (DD/MM/AAAA) *</label>
+          <input id="alq-recogida" type="text" placeholder="10/05/2026" required>
+
+          <label for="alq-devolucion">Fecha de devolución (DD/MM/AAAA) *</label>
+          <input id="alq-devolucion" type="text" placeholder="15/05/2026" required>
+
+          <button type="submit">Registrar Alquiler</button>
+        </form>
+
+        <form id="form-editar-devolucion" class="form-secundario">
+          <h3>Modificar Fecha de Devolución</h3>
+          <label for="alq-edit-codigo">Código del alquiler *</label>
+          <input id="alq-edit-codigo" type="number" min="1" required>
+
+          <label for="alq-fecha-actual">Fecha actual manual (DD/MM/AAAA) *</label>
+          <input id="alq-fecha-actual" type="text" placeholder="12/05/2026" required>
+
+          <label for="alq-nueva-devolucion">Nueva fecha de devolución (DD/MM/AAAA) *</label>
+          <input id="alq-nueva-devolucion" type="text" placeholder="20/05/2026" required>
+
+          <button type="submit" class="btn-secundario">Actualizar Devolución</button>
+        </form>
+        <ul id="lista-alquileres" class="lista-datos"></ul>
+      </section>
+
+      <!-- ADMINISTRADORES -->
+      <section class="tarjeta">
+        <h2>Administradores</h2>
+        <form id="form-admin">
+          <label for="adm-nombre">Nombre del administrador *</label>
+          <input id="adm-nombre" type="text" required>
+
+          <button type="submit">Crear Administrador</button>
+        </form>
+
+        <form id="form-editar-admin" class="form-secundario">
+          <h3>Modificar Administrador</h3>
+          <label for="adm-edit-codigo">Código del administrador *</label>
+          <input id="adm-edit-codigo" type="number" min="1" required>
+
+          <label for="adm-edit-nombre">Nuevo nombre *</label>
+          <input id="adm-edit-nombre" type="text" required>
+
+          <button type="submit" class="btn-secundario">Actualizar Administrador</button>
+        </form>
+        <ul id="lista-admins" class="lista-datos"></ul>
+      </section>
+
+      <!-- ESTADÍSTICAS -->
+      <section class="tarjeta">
+        <h2>Estadísticas Mensuales por Socio</h2>
+        <form id="form-estadistica">
+          <label for="est-admin">Código del administrador *</label>
+          <input id="est-admin" type="number" min="1" required>
+
+          <label for="est-socio">Código del socio *</label>
+          <input id="est-socio" type="number" min="1" required>
+
+          <label for="est-mes">Mes (1-12) *</label>
+          <input id="est-mes" type="number" min="1" max="12" required>
+
+          <label for="est-anio">Año *</label>
+          <input id="est-anio" type="number" min="1900" max="2100" required>
+
+          <label for="est-creacion">Fecha de creación (DD/MM/AAAA) *</label>
+          <input id="est-creacion" type="text" placeholder="31/05/2026" required>
+
+          <button type="submit">Generar Estadística</button>
+        </form>
+        <ul id="lista-estadisticas" class="lista-datos"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
